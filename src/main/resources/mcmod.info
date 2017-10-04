@@ -1,0 +1,16 @@
+[
+{
+  "modid": "easycraft_to_1710",
+  "name": "EasyCraft To 1.7.10",
+  "description": "A 1.7.10 Forge mod for transfering EasyCraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/YoungGT/EsayCraft_To_1710",
+  "updateUrl": "",
+  "authorList": ["YoungGT"],
+  "credits": "Notch, Cpw, etc.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
