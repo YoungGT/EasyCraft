@@ -1,48 +1,60 @@
-// For those who want the bleeding edge
 buildscript {
     repositories {
         jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
+        maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-ext.configFile = file('build.properties')
-ext.config = parseConfig(configFile)
 
-version = config.version
-group = config.group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = config.mod_name
+version = "1.0"
+group= "com.YoungGT.EasyCraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "easycraft"
+
+sourceCompatibility = targetCompatibility = "1.6" // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = "1.6"
+}
 
 minecraft {
-    version = "${config.mc_version}-${config.forge_version}"
+    version = "1.10.2-12.18.3.2488"
     runDir = "run"
-    mappings = config.mc_mappings
-    replace '@MC_VERSION@', config.accepted_version
-    replace '@MOD_VERSION@', config.version
-    replaceIn 'SoS.java'
+    
+    // the mappings can be changed at any time, and must be in the following format.
+    // snapshot_YYYYMMDD   snapshot are built nightly.
+    // stable_#            stables are built at the discretion of the MCP team.
+    // Use non-default mappings at your own risk. they may not allways work.
+    // simply re-run your setup task after changing the mappings to update your workspace.
+    mappings = "snapshot_20161111"
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
-
-repositories {
-    maven { url "http://maven.amadornes.com/" }
-    maven {
-        name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
-    }
-}
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    deobfCompile "mezz.jei:jei_1.10.2:+"
-    deobfCompile "MCMultiPart:MCMultiPart-experimental:1.3.0_+:universal"
+    // you may put jars on which you depend on in ./libs
+    // or you may define them like so..
+    //compile "some.group:artifact:version:classifier"
+    //compile "some.group:artifact:version"
+      
+    // real examples
+    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
+    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+
+    // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
+    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
+    // except that these dependencies get remapped to your current MCP mappings
+    //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+    //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
+
+    // for more info...
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
+
 }
 
 processResources
@@ -64,11 +76,4 @@ processResources
         exclude 'mcmod.info'
     }
 }
-
-def parseConfig(File config) {
-    config.withReader {
-        def prop = new Properties()
-        prop.load(it)
-        return (new ConfigSlurper().parse(prop))
-    }
-}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'

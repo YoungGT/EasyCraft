@@ -1,0 +1,16 @@
+[
+{
+  "modid": "easycraft",
+  "name": "EasyCraft",
+  "description": "A Forge mod for transfering EasyCraft",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/YoungGT/EsayCraft",
+  "updateUrl": "",
+  "authorList": ["YoungGT"],
+  "credits": "Notch, Cpw, etc.",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
