@@ -4,40 +4,35 @@ import java.util.Random;
 
 import com.github.YoungGT.EasyCraft.creativetab.CreativeTabsLoader;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockSlimeBlock extends Block {
 	public BlockSlimeBlock() {
-		super(Material.rock);
-		setBlockName("slimeBlock");
+		super(Material.ROCK);
+		setUnlocalizedName("slimeBlock");
 		setHardness(1.5F);
-		setStepSound(soundTypeStone);
+		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 1);
 		setResistance(10);
 		setCreativeTab(CreativeTabsLoader.tabEasyCraft);
 	}
-
+	
+	@Override
 	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		blockIcon = register.registerIcon("easycraft:slimeBlock");
-	}
-
-	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		// TODO 自动生成的方法存根
-		return Items.slime_ball;
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Items.SLIME_BALL;
 	}
 
 	@Override
 	public int quantityDropped(Random random) {
-		// TODO 自动生成的方法存根
 		return 9;
 	}
 }
