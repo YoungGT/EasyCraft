@@ -1,14 +1,14 @@
 package com.github.YoungGT.EasyCraft.worldgen;
 
-import cpw.mods.fml.common.eventhandler.Event.Result;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.OreGenEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class WorldGeneratorLoader {
 	private static WorldGenerator generatorSulfurOre = new WorldGeneratorSulfurOre();
-	private int aX, aZ;
+	private BlockPos pos;
 
 	public WorldGeneratorLoader() {
 		MinecraftForge.ORE_GEN_BUS.register(this);
@@ -16,8 +16,9 @@ public class WorldGeneratorLoader {
 
 	@SubscribeEvent
 	public void onOreGenPost(OreGenEvent.Post event) {
-		this.aX = event.worldX;
-		this.aZ = event.worldZ;
-		generatorSulfurOre.generate(event.world, event.rand, event.worldX, 0, event.worldZ);
+		if (!event.getPos().equals(this.pos)) {
+			this.pos = event.getPos();
+			generatorSulfurOre.generate(event.getWorld(), event.getRand(), event.getPos());
+		}
 	}
 }

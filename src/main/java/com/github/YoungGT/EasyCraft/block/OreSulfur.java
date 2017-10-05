@@ -4,38 +4,34 @@ import java.util.Random;
 
 import com.github.YoungGT.EasyCraft.creativetab.CreativeTabsLoader;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class OreSulfur extends Block {
 	public OreSulfur() {
-		super(Material.rock);
-		setBlockName("sulfurOre");
+		super(Material.ROCK);
+		setUnlocalizedName("sulfurOre");
 		setHardness(2.0F);
-		setStepSound(soundTypeStone);
+		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", 1);
 		setResistance(10);
 		setCreativeTab(CreativeTabsLoader.tabEasyCraft);
 	}
-
+	
+	@Override
 	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		blockIcon = register.registerIcon("easycraft:sulfurOre");
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+		return Items.GUNPOWDER;
 	}
-
+	
 	@Override
-	public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-		return Items.gunpowder;
-	}
-
-	@Override
-	public int quantityDropped(Random random) {
-		return 4;
+	public int quantityDroppedWithBonus(int fortune, Random random) {
+		return 4 + random.nextInt(fortune + 3);
 	}
 }
