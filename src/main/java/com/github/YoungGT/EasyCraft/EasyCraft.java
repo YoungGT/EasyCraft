@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 /**
  * @author YoungGT
  */
-@Mod(modid = EasyCraft.MODID, name = EasyCraft.NAME, version = EasyCraft.VERSION, acceptedMinecraftVersions = "1.7.10")
+@Mod(modid = EasyCraft.MODID, name = EasyCraft.NAME, version = EasyCraft.VERSION, acceptedMinecraftVersions = "1.10.2")
 public class EasyCraft {
 	public final static String MODID = "easycraft";
 	public final static String NAME = "Easy Craft";
